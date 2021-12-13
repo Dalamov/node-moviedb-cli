@@ -75,7 +75,26 @@ function renderPersonData(person) {
   }
 }
 
+function renderMoviesData(page, totalPages, movies){
+  log(chalk.white(`\n----------------------------------------`));
+  log(chalk.white(`page: ${page} of: ${totalPages}`));
+
+  movies.forEach((movie) => {
+    log(chalk.white(`----------------------------------------`));
+    log(`\n`);
+    log(`${chalk.white(`Movie:\n`)}`);
+    log(`ID: ${chalk.white.bold(movie.id)}`);
+    log(`Title: ${chalk.blue.bold(movie.title)}`);
+    log(`Release Date: ${chalk.white.bold(movie.release_date)}`);
+}
+)}
+// function renderMovieData(){
+
+// }
+
 module.exports = {
   renderPersonsData: renderPersonsData,
   renderPersonData: renderPersonData,
+  renderMoviesData: renderMoviesData,
+  // renderMovieData: renderMovieData
 };
