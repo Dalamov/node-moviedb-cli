@@ -9,12 +9,16 @@ function saveMovies(movies, options) {
     path = "bin/movies/now_playing.json";
   }
 
-  if (fs.access(path)) {
-    fs.appendFile(path, movies);
-  } else {
-    fs.mkdir(path);
-    fs.appendFile(path, movies);
-  }
+  fs.access(path, () => {
+    try {
+      fs.appendFile(path, movies);
+    } catch (err) {
+      if (err.code == "ENOENT") {
+        fs.mkdir(path);
+        fs.appendFile(path, persons);
+      }
+    }
+  });
 }
 
 function savePersons(persons) {
