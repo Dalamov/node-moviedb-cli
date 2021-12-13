@@ -9,17 +9,22 @@ function saveMovies(movies, options) {
     path = "bin/movies/now_playing.json";
   }
 
-  fs.appendFile(path, movies, (err) => {
-    if (err) console.log(err);
-  });
+  if (fs.access(path)) {
+    fs.appendFile(path, movies);
+  } else {
+    fs.mkdir(path);
+    fs.appendFile(path, movies);
+  }
 }
 
 function savePersons(persons) {
   let path = "bin/persons/persons.json";
-
-  fs.appendFile(path, persons, (err) => {
-    if (err) console.log(err);
-  });
+  if (fs.access(path)) {
+    fs.appendFile(path, persons);
+  } else {
+    fs.mkdir(path);
+    fs.appendFile(path, persons);
+  }
 }
 
 module.exports = {

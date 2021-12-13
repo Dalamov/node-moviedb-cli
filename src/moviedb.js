@@ -40,14 +40,13 @@ program
 
       res.on("data", function onData(resData) {
         responseBody += resData;
+        if (options.save) {
+          savePersons(responseBody);
+        }
       });
 
       res.on("end", function onEnd() {
         const data = JSON.parse(responseBody);
-
-        if (options.save) {
-          savePersons(data);
-        }
 
         renderPersonsData(data.page, data.total_pages, data.results);
 
@@ -102,6 +101,7 @@ program
   .requiredOption("--page <number>", "The page of movies data results to fetch")
   .option("-p, --popular", "Fetch the popular movies")
   .option("-n, --now-playing", "Fetch the movies that are playing now")
+  .option("-s, --save", "Save Data to Locale")
   .action(function getMovies(options) {
     let path = "";
     if (options.nowPlaying) {
@@ -124,6 +124,9 @@ program
 
       res.on("data", function onData(resData) {
         responseBody += resData;
+        if (options.save) {
+          saveMovies(responseBody, options);
+        }
       });
 
       res.on("end", function onEnd() {
