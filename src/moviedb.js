@@ -80,11 +80,10 @@ program
       });
     });
 
-    req.on("error", (e) => {
-      ora.error("Error: Network request fails");
-    });
     req.end();
   });
+
+
 
 program
   .command("get-movies")

@@ -5,6 +5,7 @@ const log = console.log;
 function renderPersonsData(page, totalPages, persons) {
   if (totalPages > page) {
     log(chalk.white(`\n\n----------------------------------------`));
+    log(chalk.white(`page: ${page} of: ${totalPages}`));
   }
 
   persons.forEach(function renderPerson(person) {
